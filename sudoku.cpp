@@ -3,7 +3,7 @@ using namespace std;
 
 #define N 9
 
-// Function to print the grid
+
 void printGrid(int grid[N][N]) {
     for (int row = 0; row < N; row++) {
         for (int col = 0; col < N; col++) {
@@ -13,15 +13,15 @@ void printGrid(int grid[N][N]) {
     }
 }
 
-// Check if it's safe to place num in grid[row][col]
+
 bool isSafe(int grid[N][N], int row, int col, int num) {
-    // Check row and column
+    
     for (int x = 0; x < N; x++) {
         if (grid[row][x] == num || grid[x][col] == num)
             return false;
     }
 
-    // Check 3x3 box
+  
     int startRow = row - row % 3;
     int startCol = col - col % 3;
 
@@ -33,29 +33,28 @@ bool isSafe(int grid[N][N], int row, int col, int num) {
     return true;
 }
 
-// Main solver using backtracking
+
 bool solveSudoku(int grid[N][N]) {
     for (int row = 0; row < N; row++) {
         for (int col = 0; col < N; col++) {
-            // If current cell is empty
+           
             if (grid[row][col] == 0) {
-                // Try all numbers 1 to 9
+              
                 for (int num = 1; num <= 9; num++) {
                     if (isSafe(grid, row, col, num)) {
                         grid[row][col] = num;
-                        if (solveSudoku(grid))  // Recur
+                        if (solveSudoku(grid)) 
                             return true;
-                        grid[row][col] = 0; // Undo
+                        grid[row][col] = 0; 
                     }
                 }
-                return false; // Trigger backtracking
+                return false; 
             }
         }
     }
-    return true; // Sudoku is solved
-}
+    return true; 
 
-// Driver code
+
 int main() {
     int grid[N][N] = {
         {5,3,0, 0,7,0, 0,0,0},
